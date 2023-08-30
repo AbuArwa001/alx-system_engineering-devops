@@ -3,7 +3,7 @@
  * The shell projects contains the following tasks:
    - [**Task 0 - where am i?**](0-current_working_directory)
    - [**Task 1 - what's in there?**](1-listit)
-   - [**Task 2 - There is no place like home](2-bring_me_home)
+   - [**Task 2 - There is no place like home**](2-bring_me_home)
    
 #### Task 0 -  Where am I? ####
 
