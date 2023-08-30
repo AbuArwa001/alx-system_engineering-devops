@@ -95,3 +95,14 @@ drwxr-xr-x@ 43 501 20 1462 Jan 25 00:19 ..
 -rwxr-xr-x@ 1 501 20 18 Jan 25 00:43 5-listfilesdigitonly
 $
 ~~~
+#### Task 6 - Welcome ####
+
+* Create a script that creates a directory named my_first_directory in the /tmp/ directory.
+
+###### Example: ######
+~~~
+$ ./6-firstdirectory
+$ file /tmp/my_first_directory/
+/tmp/my_first_directory/: directory
+$
+~~~
