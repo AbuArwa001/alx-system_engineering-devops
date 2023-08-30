@@ -16,9 +16,11 @@
    - [**Task 12 - File type**](12-file_type)
    - [**Task 13 - We are symbols, and inhabit symbols**](13-symbolic_link)
    - [**Task 14 - Copy HTML files**](14-copy_html)
- <!--  - [**Task 15 - The long format **](3-listfiles)
-   - [**Task 16 - The long format **](3-listfiles) -->
-   
+   - [**Task 15 - Let’s move**](3-listfiles)
+   - [**Task 16 - Clean Emacs**](3-listfiles)
+   - [**Task 17 - Tree**](102-tree)
+   - [**Task 18 - Life is a series of commas, not periods**](103-commas)
+   - [**Task 19 - File type: School**](school.mgc)
    
    
 #### Task 0 -  Where am I? ####
@@ -216,3 +218,36 @@ lrwxrwxrwx  1 ubuntu ubuntu      7 Sep 20 03:24 __ls__ -> /bin/ls
 * Create a script that copies all the HTML files from the current working directory to the parent of the working directory, but only copy files that did not exist in the parent of the working directory or were newer than the versions in the parent of the working directory.
 
 > - You can consider that all HTML files have the extension .html
+
+#### 15 - Let’s move ####
+
+* Create a script that moves all files beginning with an uppercase letter to the directory /tmp/u.
+
+* You can assume that the directory /tmp/u will exist when we will run your script
+~~~
+ubuntu@ip-172-31-63-244:/tmp/sym$ ls -la
+total 148
+drwxrwxr-x  3 ubuntu ubuntu   4096 Sep 20 03:33 .
+drwxrwxrwt 12 root   root   139264 Sep 20 03:26 ..
+-rw-rw-r--  1 ubuntu ubuntu      0 Sep 20 03:32 My_file
+lrwxrwxrwx  1 ubuntu ubuntu      7 Sep 20 03:24 __ls__ -> /bin/ls
+-rw-rw-r--  1 ubuntu ubuntu      0 Sep 20 03:32 Elif_ym
+-rw-rw-r--  1 ubuntu ubuntu      0 Sep 20 03:32 random_file
+ubuntu@ip-172-31-63-244:/tmp/sym$ ls -la /tmp/u
+total 8
+drwxrwxr-x 2 ubuntu ubuntu 4096 Sep 20 03:33 .
+drwxrwxr-x 3 ubuntu ubuntu 4096 Sep 20 03:33 ..
+ubuntu@ip-172-31-63-244:/tmp/sym$ ./100-lets_move
+ubuntu@ip-172-31-63-244:/tmp/sym$ ls -la
+total 148
+drwxrwxr-x  3 ubuntu ubuntu   4096 Sep 20 03:33 .
+drwxrwxrwt 12 root   root   139264 Sep 20 03:26 ..
+lrwxrwxrwx  1 ubuntu ubuntu      7 Sep 20 03:24 __ls__ -> /bin/ls
+-rw-rw-r--  1 ubuntu ubuntu      0 Sep 20 03:32 random_file
+ubuntu@ip-172-31-63-244:/tmp/sym$ ls -la /tmp/u
+total 8
+drwxrwxr-x 2 ubuntu ubuntu 4096 Sep 20 03:33 .
+drwxrwxr-x 3 ubuntu ubuntu 4096 Sep 20 03:33 ..
+-rw-rw-r-- 1 ubuntu ubuntu    0 Sep 20 03:32 My_file
+-rw-rw-r-- 1 ubuntu ubuntu    0 Sep 20 03:32 Elif_ym
+~~~
