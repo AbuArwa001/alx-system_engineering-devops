@@ -4,6 +4,22 @@
    - [**Task 0 - where am i?**](0-current_working_directory)
    - [**Task 1 - what's in there?**](1-listit)
    - [**Task 2 - There is no place like home**](2-bring_me_home)
+   - [**Task 3 - The long format **](3-listfiles)
+   - [**Task 4 - Hidden files**](4-listmorefiles)
+   - [**Task 5 - I love numbers**](5-listfilesdigitonly)
+   - [**Task 6 - Welcome**](6-firstdirectory)
+   - [**Task 7 - Betty in my first directory**](7-movethatfile)
+   - [**Task 8 - Bye bye Betty  **](8-firstdelete)
+   - [**Task 9 - Bye bye My first directory**](9-firstdirdeletion)
+   - [**Task 10 - Back to the future**](10-back)
+   - [**Task 11 - Lists**](11-lists)
+   - [**Task 12 - File type**](12-file_type)
+   - [**Task 13 - We are symbols, and inhabit symbols**](13-symbolic_link)
+   - [**Task 14 - Copy HTML files**](14-copy_html)
+ <!--  - [**Task 15 - The long format **](3-listfiles)
+   - [**Task 16 - The long format **](3-listfiles) -->
+   
+   
    
 #### Task 0 -  Where am I? ####
 
@@ -104,5 +120,17 @@ $
 $ ./6-firstdirectory
 $ file /tmp/my_first_directory/
 /tmp/my_first_directory/: directory
+$
+~~~
+
+#### Task 7 -  Betty in my first directory ####
+
+* Move the file betty from /tmp/ to /tmp/my_first_directory.
+
+###### Example: ######
+~~~
+$ ./7-movethatfile
+$ ls /tmp/my_first_directory/
+betty
 $
 ~~~
