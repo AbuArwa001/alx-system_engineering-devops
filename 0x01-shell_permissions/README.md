@@ -60,3 +60,7 @@ total 4
 -rw-rw-r-- 1 betty  julien  0 Sep 20 14:18 hello
 julien@ubuntu:/tmp/h$
 ~~~
+
+#### Task 4 - Empty! ####
+
+* Write a script that creates an empty file called hello.
