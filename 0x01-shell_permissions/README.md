@@ -122,3 +122,25 @@ total 8
 -rwxr-x--x 1 julien julien 23 Sep 20 14:25 hello
 julien@ubuntu:/tmp/h$ 
 ~~~
+
+#### Task 8. James Bond ####
+
+* Write a script that sets the permission to the file hello as follows:
+
+   - Owner: no permission at all
+   - Group: no permission at all
+   - Other users: all the permissions
+
+* The file hello will be in the working directory You are not allowed to use commas for this script
+~~~
+julien@ubuntu:/tmp/h$ ls -l
+total 8
+-rwxrw-r-- 1 julien julien 28 Sep 20 14:40 8-James_Bond
+-rwxr-x--x 1 julien julien 23 Sep 20 14:25 hello
+julien@ubuntu:/tmp/h$ ./8-James_Bond 
+julien@ubuntu:/tmp/h$ ls -l
+total 8
+-rwxrw-r-- 1 julien julien 28 Sep 20 14:40 8-James_Bond
+-------rwx 1 julien julien 23 Sep 20 14:25 hello
+julien@ubuntu:/tmp/h$ 
+~~~
