@@ -26,3 +26,12 @@ julien@ubuntu:/tmp/h$ tail -1 0-iam_betty | wc -c
 9
 julien@ubuntu:/tmp/h$
 ~~~
+
+#### 1. Who am I ####
+
+* Write a script that prints the effective username of the current user.
+~~~
+julien@ubuntu:/tmp/h$ ./1-who_am_i
+julien
+julien@ubuntu:/tmp/h$ 
+~~~
