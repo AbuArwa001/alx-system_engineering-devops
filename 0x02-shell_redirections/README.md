@@ -16,6 +16,7 @@
 8. ![**Task 7 - It is a good file that cuts iron without making a noise**](task-
 7--It-is-a-good-file-that-cuts-iron-without-making-a-noise)
 9. ![** **]()
+10. ![**Task 9 - Duplicate last line**](#-task-9-Duplicate-last-line)
 #### Task 0 - Hello World ####
 
 * Write a script that prints “Hello, World”, followed by a new line to the standard output.
@@ -277,5 +278,46 @@ drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
 -rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
 -rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
 -rw-rw-r--  1 julien julien    0 Sep 20 18:18 ls_cwd_content
+julien@ubuntu:/tmp/h$ 
+~~~
+
+#### Task 9 - Duplicate last line ####
+
+* Write a script that duplicates the last line of the file iacta
+
+   - The file iacta will be in the working directory
+~~~
+julien@ubuntu:/tmp/h$ cat iacta 
+Alea iacta est
+
+Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
+(as iacta alea est) to Julius Caesar on January 10, 49 BC
+as he led his army across the Rubicon river in Northern Italy. With this step,
+he entered Italy at the head of his army in defiance of the Senate and began
+his long civil war against Pompey and the Optimates. The phrase has been
+adopted in Italian (Il dado è tratto), Romanian (Zarurile au fost aruncate),
+Spanish (La suerte está echada), French (Les dés sont jetés), Portuguese (A
+sorte está lançada), Dutch (De teerling is geworpen),
+German (Der Würfel ist gefallen), Hungarian (A kocka el van vetve) and many other languages to
+indicate that events have passed a point of no return.
+
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+julien@ubuntu:/tmp/h$ ./9-duplicate_last_line 
+julien@ubuntu:/tmp/h$ cat iacta 
+Alea iacta est
+
+Alea iacta est ("The die is cast") is a Latin phrase attributed by Suetonius
+(as iacta alea est) to Julius Caesar on January 10, 49 BC
+as he led his army across the Rubicon river in Northern Italy. With this step,
+he entered Italy at the head of his army in defiance of the Senate and began
+his long civil war against Pompey and the Optimates. The phrase has been
+adopted in Italian (Il dado è tratto), Romanian (Zarurile au fost aruncate),
+Spanish (La suerte está echada), French (Les dés sont jetés), Portuguese (A
+sorte está lançada), Dutch (De teerling is geworpen),
+German (Der Würfel ist gefallen), Hungarian (A kocka el van vetve) and many other languages to
+indicate that events have passed a point of no return.
+
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
 julien@ubuntu:/tmp/h$ 
 ~~~
