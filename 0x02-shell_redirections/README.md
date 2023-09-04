@@ -6,13 +6,12 @@
   * Most command line programs that display their results do so by sending their results to a facility called standard output. By default, standard
 
 ### Table of Content
-
-1. ![**Task 0 - Hello World**](task-0---Hello-World)
-2. ![**Task 1 - Confused smiley**](task-1---Confused-smiley)
-3. ![**Task 2 - Let's display a file**](Task-2---Let's-display-a-file)
-4. ![**Task 3 -  What about 2? **](task-3-What-about-2)
-5. ![**Task 4 - Last lines of a file**](task-4-Last-lines-of-a-file)
-
+1. ![**Task 0 - Hello World**](#task-0---Hello-World)
+2. ![**Task 1 - Confused smiley**](#task-1---Confused-smiley)
+3. ![**Task 2 - Let's display a file**](#Task-2---Let's-display-a-file)
+4. ![**Task 3 - What about 2?**](#task-3-What-about-2)
+5. ![**Task 4 - Last lines of a file**](#task-4-Last-lines-of-a-file)
+6. ![**Task 5 - I'd prefer the first ones actually**](#task-5-I'd-prefer-the-first-ones-actually)
 #### Task 0 - Hello World ####
 
 * Write a script that prints “Hello, World”, followed by a new line to the standard output.
@@ -120,4 +119,24 @@ _astris:*:245:245:Astris Services:/var/db/astris:/usr/bin/false
 _krbfast:*:246:-2:Kerberos FAST Account:/var/empty:/usr/bin/false
 
 Tips: “Thinks of it as a cat, what is at the end of it?”
+~~~
+
+#### Task 5 - I'd prefer the first ones actually ####
+
+* Display the first 10 lines of /etc/passwd
+
+###### Example: ######
+~~~
+$ ./5-firstlines
+##
+# User Database
+#
+# Note that this file is consulted directly only when the system is running
+# in single-user mode. At other times this information is provided by
+# Open Directory.
+#
+# See the opendirectoryd(8) man page for additional information about
+# Open Directory.
+##
+$
 ~~~
