@@ -17,6 +17,8 @@
 7--It-is-a-good-file-that-cuts-iron-without-making-a-noise)
 9. ![** **]()
 10. ![**Task 9 - Duplicate last line**](#-task-9-Duplicate-last-line)
+11. ![**Task 10 - No more javascript**](#-task-10---No-more-javascript)
+
 #### Task 0 - Hello World ####
 
 * Write a script that prints “Hello, World”, followed by a new line to the standard output.
@@ -218,38 +220,6 @@ Best School$
 julien@ubuntu:~/shell$
 ~~~
 
-8. Save current state of directory
-mandatory
-
-Write a script that writes into the file ls_cwd_content the result of the command ls -la. If the file ls_cwd_content already exists, it should be overwritten. If the file ls_cwd_content does not exist, create it.
-
-julien@ubuntu:/tmp/h$ ls -la
-total 20
-drwxrwxr-x  2 julien julien 4096 Sep 20 18:18 .
-drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
--rwxrw-r--  1 julien julien   36 Sep 20 18:18 8-cwd_state
--rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
--rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
-julien@ubuntu:/tmp/h$ ./8-cwd_state 
-julien@ubuntu:/tmp/h$ ls -la
-total 24
-drwxrwxr-x  2 julien julien 4096 Sep 20 18:18 .
-drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
--rwxrw-r--  1 julien julien   36 Sep 20 18:18 8-cwd_state
--rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
--rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
--rw-rw-r--  1 julien julien  329 Sep 20 18:18 ls_cwd_content
-julien@ubuntu:/tmp/h$ cat ls_cwd_content 
-total 20
-drwxrwxr-x  2 julien julien 4096 Sep 20 18:18 .
-drwxrwxrwt 13 root   root   4096 Sep 20 18:18 ..
--rwxrw-r--  1 julien julien   36 Sep 20 18:18 8-cwd_state
--rw-rw-r--  1 betty  julien   23 Sep 20 14:25 hello
--rw-rw-r--  1 julien julien  926 Sep 20 17:52 iacta
--rw-rw-r--  1 julien julien    0 Sep 20 18:18 ls_cwd_content
-julien@ubuntu:/tmp/h$ 
-
-
 #### Task 8 - Save current state of directory ####
 
 * Write a script that writes into the file ls_cwd_content the result of the command ls -la. If the file ls_cwd_content already exists, it should be overwritten. If the file ls_cwd_content does not exist, create it.
@@ -319,5 +289,46 @@ indicate that events have passed a point of no return.
 
 Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
 Read more: https://en.wikipedia.org/wiki/Alea_iacta_est
+julien@ubuntu:/tmp/h$ 
+~~~
+
+#### Task 10 - No more javascript ####
+
+* Write a script that deletes all the regular files (not the directories) with a .js extension that are present in the current directory and all its subfolders.
+
+~~~
+julien@ubuntu:/tmp/h$ ls -lR
+.:
+total 24
+-rwxrw-r-- 1 julien julien   49 Sep 20 18:29 10-no_more_js
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:23 dir1
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:24 dir.js
+-rw-rw-r-- 1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r-- 1 julien julien  982 Sep 20 18:21 iacta
+-rw-rw-r-- 1 julien julien  329 Sep 20 18:18 ls_cwd_content
+-rw-rw-r-- 1 julien julien    0 Sep 20 18:23 main.js
+
+./dir1:
+total 0
+-rw-rw-r-- 1 julien julien 0 Sep 20 18:23 code.js
+
+./dir.js:
+total 0
+julien@ubuntu:/tmp/h$ ./10-no_more_js 
+julien@ubuntu:/tmp/h$ ls -lR
+.:
+total 24
+-rwxrw-r-- 1 julien julien   49 Sep 20 18:29 10-no_more_js
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:29 dir1
+drwxrwxr-x 2 julien julien 4096 Sep 20 18:24 dir.js
+-rw-rw-r-- 1 betty  julien   23 Sep 20 14:25 hello
+-rw-rw-r-- 1 julien julien  982 Sep 20 18:21 iacta
+-rw-rw-r-- 1 julien julien  329 Sep 20 18:18 ls_cwd_content
+
+./dir1:
+total 0
+
+./dir.js:
+total 0
 julien@ubuntu:/tmp/h$ 
 ~~~
