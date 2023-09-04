@@ -7,10 +7,11 @@
 
 ### Table of Content
 
-![**Task 0 - Hello World**](#Task-0---Hello-World)
-![**Task 1 - Confused smiley**](#-Task-1---Confused-smiley)
-![**Task 3 -  What about 2? **](Task-3-What-about-2?-)
-![**Task 4 - Last lines of a file**](#-Task4-Last-lines-of-a-file)
+1. ![**Task 0 - Hello World**](task-0---Hello-World)
+2. ![**Task 1 - Confused smiley**](task-1---Confused-smiley)
+3. ![**Task 2 - Let's display a file**](Task-2---Let's-display-a-file)
+4. ![**Task 3 -  What about 2? **](task-3-What-about-2)
+5. ![**Task 4 - Last lines of a file**](task-4-Last-lines-of-a-file)
 
 #### Task 0 - Hello World ####
 
