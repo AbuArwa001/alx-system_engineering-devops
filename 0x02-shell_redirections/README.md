@@ -7,12 +7,12 @@
 
 ### Table of Content
 
-![**Task 0 - Hello World**](# TAsk 0 - Hello World)
-![**Task 1 - 1. Confused smiley**](# Task 1 - Confused smiley)
-![]()
+![**Task 0 - Hello World**](#Task-0---Hello-World)
+![**Task 1 - Confused smiley**](#-Task-1---Confused-smiley)
+![**Task 3 -  What about 2? **](Task-3-What-about-2?-)
+![**Task 4 - Last lines of a file**](#-Task4-Last-lines-of-a-file)
 
-
-#### TAsk 0 - Hello World ####
+#### Task 0 - Hello World ####
 
 * Write a script that prints “Hello, World”, followed by a new line to the standard output.
 ~~~
@@ -97,4 +97,26 @@ daemon:*:1:1:System Services:/var/root:/usr/bin/false
 255.255.255.255 broadcasthost
 ::1 localhost
 $
+~~~
+
+
+#### 4. Last lines of a file ###
+
+* Display the last 10 lines of /etc/passwd
+
+###### Example: ######
+~~~
+$ ./4-lastlines
+_assetcache:*:235:235:Asset Cache Service:/var/empty:/usr/bin/false
+_coremediaiod:*:236:236:Core Media IO Daemon:/var/empty:/usr/bin/false
+_launchservicesd:*:239:239:_launchservicesd:/var/empty:/usr/bin/false
+_iconservices:*:240:240:IconServices:/var/empty:/usr/bin/false
+_distnote:*:241:241:DistNote:/var/empty:/usr/bin/false
+_nsurlsessiond:*:242:242:NSURLSession Daemon:/var/db/nsurlsessiond:/usr/bin/false
+_nsurlstoraged:*:243:243:NSURLStorage Daemon:/var/empty:/usr/bin/false
+_displaypolicyd:*:244:244:Display Policy Daemon:/var/empty:/usr/bin/false
+_astris:*:245:245:Astris Services:/var/db/astris:/usr/bin/false
+_krbfast:*:246:-2:Kerberos FAST Account:/var/empty:/usr/bin/false
+
+Tips: “Thinks of it as a cat, what is at the end of it?”
 ~~~
