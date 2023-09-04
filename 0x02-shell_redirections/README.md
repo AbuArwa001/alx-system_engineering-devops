@@ -494,3 +494,16 @@ $ ./17-hidethisword
 ##
 $
 ~~~
+#### Task  18 - Letters only please ####
+* Display all lines of the file /etc/ssh/sshd_config starting with a letter.
+
+   - include capital letters as well
+~~~
+$ ./18-letteronly
+SyslogFacility AUTHPRIV
+AuthorizedKeysFile  .ssh/authorized_keys
+UsePrivilegeSeparation sandbox # Default for new installations.
+AcceptEnv LANG LC_*
+Subsystem   sftp    /usr/libexec/sftp-server
+$
+~~~
