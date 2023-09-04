@@ -1,0 +1,17 @@
+total 68
+drwxrwxr-x 2 khalfan khalfan  4096 Sep  4 14:31 .
+drwxrwxr-x 6 khalfan khalfan  4096 Sep  4 10:54 ..
+-rwxrw-r-- 1 khalfan khalfan    32 Sep  4 11:14 0-hello_world
+-rwxrw-r-- 1 khalfan khalfan    28 Sep  4 12:28 1-confused_smiley
+-rwxrw-r-- 1 khalfan khalfan    28 Sep  4 11:39 2-hellofile
+-rwxrw-r-- 1 khalfan khalfan    39 Sep  4 11:49 3-twofiles
+-rwxrw-r-- 1 khalfan khalfan    35 Sep  4 12:12 4-lastlines
+-rwxrw-r-- 1 khalfan khalfan    35 Sep  4 12:40 5-firstlines
+-rwxrw-r-- 1 khalfan khalfan    40 Sep  4 13:06 6-third_line
+-rw-rw-r-- 1 khalfan khalfan    12 Sep  4 12:44 6-third_line~
+-rwxrw-r-- 1 khalfan khalfan    73 Sep  4 13:54 7-file
+-rwxrw-r-- 1 khalfan khalfan    65 Sep  4 13:51 7-file~
+-rwxrw-r-- 1 khalfan khalfan    36 Sep  4 14:28 8-cwd_state
+-rw-rw-r-- 1 khalfan khalfan     0 Sep  4 14:31 ls_cwd_content
+-rw-rw-r-- 1 khalfan khalfan 10548 Sep  4 14:27 README.md
+-rw-rw-r-- 1 khalfan khalfan   356 Sep  4 11:06 README.md~
