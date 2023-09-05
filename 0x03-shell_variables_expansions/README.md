@@ -146,3 +146,11 @@ julien@ubuntu:/tmp/0x03$
 
    - Name: BEST
    - Value: School
+
+
+#### Task 7 - Global variable ####
+
+* Create a script that creates a new global variable.
+
+  -  Name: BEST
+  -  Value: School
