@@ -285,3 +285,54 @@ julien@production-503e7013:~/shell/fun_with_the_shell$ ./101-rot13 < quote
 - Qbebgul R. Qraavat
 julien@production-503e7013:~/shell/fun_with_the_shell$
 ~~~
+
+#### Task 16 - The eggs of the brood need to be an odd number ####
+
+* Write a script that prints every other line from the input, starting with the first line.
+~~~
+ubuntu@ip-172-31-63-244:/$ \ls -1
+bin
+boot
+dev
+etc
+home
+initrd.img
+lib
+lib32
+lib64
+libx32
+lost+found
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+t
+#t#
+t~
+tmp
+usr
+var
+vmlinuz
+whoareyou
+ubuntu@ip-172-31-63-244:/$ \ls -1 | ./102-odd
+bin
+dev
+home
+lib
+lib64
+lost+found
+mnt
+proc
+run
+srv
+t
+t~
+usr
+vmlinuz
+ubuntu@ip-172-31-63-244:/$
+~~~
