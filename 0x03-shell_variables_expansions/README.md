@@ -254,7 +254,7 @@ ubuntu@ip-172-31-63-244:~/0x03$ ./13-print_float
 ubuntu@ip-172-31-63-244:~/0x03$
 ~~~
 
-#### 14. Decimal to Hexadecimal ####
+#### Task 14 - Decimal to Hexadecimal ####
 
 * Write a script that converts a number from base 10 to base 16.
 
@@ -271,4 +271,17 @@ julien@production-503e7013:~/$ export DECIMAL=15
 julien@production-503e7013:~/$ ./100-decimal_to_hexadecimal | cat -e
 f$
 julien@production-503e7013:~/$
+~~~
+
+#### Task 15 - Everyone is a proponent of strong encryption ####
+
+* Write a script that encodes and decodes text using the rot13 encryption. Assume ASCII.
+~~~
+julien@production-503e7013:~/shell/fun_with_the_shell$ cat quote
+"Everyone is a proponent of strong encryption."
+- Dorothy E. Denning
+julien@production-503e7013:~/shell/fun_with_the_shell$ ./101-rot13 < quote
+"Rirelbar vf n cebcbarag bs fgebat rapelcgvba."
+- Qbebgul R. Qraavat
+julien@production-503e7013:~/shell/fun_with_the_shell$
 ~~~
