@@ -140,3 +140,9 @@ LOGNAME=franky
 [...]
 julien@ubuntu:/tmp/0x03$ 
 ~~~
+#### Task 6 - Local variable ####
+
+* Create a script that creates a new local variable.
+
+   - Name: BEST
+   - Value: School
