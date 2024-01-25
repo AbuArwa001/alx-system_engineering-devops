@@ -8,10 +8,15 @@ i=1
 while [ $i -le 20 ]
 do
     echo "$i"
-    case $i in
-        4) echo "bad luck from China";;
-        9) echo "bad luck from Japan";;
-        17) echo "bad lack from Italy";;
-    esac
+    if [ $i -eq 4 ]
+    then
+        echo "bad luck from China"
+    elif [ $i -eq 9 ]
+    then
+        echo "bad luck from Japan"
+    elif [ $i -eq 17 ]
+    then
+         echo "bad luck from Italy"
+    fi
 i=$((i += 1))
 done
