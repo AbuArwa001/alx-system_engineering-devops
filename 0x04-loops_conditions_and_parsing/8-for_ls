@@ -5,9 +5,9 @@
 #Where only the part of the name after
 #the first dash is displayed (refer to the example)
 
-list="ls -1"
+list=$(ls -1)
 
-for i in `$list`;
+for i in $list;
 do
     #echo "$i"
     #echo `expr match "$i" '.*\([A-C][A-C][A-C][a-c]*\)'`
