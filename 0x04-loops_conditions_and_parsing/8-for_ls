@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#Bash script that displays:
+#The content of the current directory
+#In a list format
+#Where only the part of the name after
+#the first dash is displayed (refer to the example)
+
+list="ls -1"
+
+for i in `$list`;
+do
+    #echo "$i"
+    #echo `expr match "$i" '.*\([A-C][A-C][A-C][a-c]*\)'`
+    part_after_dash=$(echo "$i" | cut -d '-' -f 2-)
+
+    # Print the extracted part
+    echo "$part_after_dash"
+done
