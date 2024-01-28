@@ -8,14 +8,19 @@ if [ ! -f "$log_file" ]; then
 fi
 
 # Use awk to extract and display IP and HTTP status code
+# Replace with the actual path to your Apache log file
+
 awk '
 {
-    arr[$1]++
-    status_field[$1] = $9
+    ip = $1
+    http_code = $9
+    key = ip " " http_code
+    occurrences[key]++
 }
 END {
-    for (i in arr) 
-        print arr[i], i, status_field[i]
+    for (key in occurrences) 
+        print occurrences[key], key
 }
-' "$log_file" | sort -n -r
+' "$log_file" | sort -nr
+
 
