@@ -8,4 +8,14 @@ if [ ! -f "$log_file" ]; then
 fi
 
 # Use awk to extract and display IP and HTTP status code
-awk '{arr[$1]++} END{for (i in arr) print arr[i], i, $9}' "$log_file" | sort -n -r
+awk '
+{
+    arr[$1]++
+    status_field[$1] = $9
+}
+END {
+    for (i in arr) 
+        print arr[i], i, status_field[i]
+}
+' "$log_file" | sort -n -r
+
