@@ -10,17 +10,4 @@ fi
 # Use awk to extract and display IP and HTTP status code
 # Replace with the actual path to your Apache log file
 
-awk '
-{
-    ip = $1
-    http_code = $9
-    key = ip " " http_code
-    occurrences[key]++
-}
-END {
-    for (key in occurrences) 
-        print occurrences[key], key
-}
-' "$log_file" | sort -nr
-
-
+awk ' { print $1,$9 } ' < apache-access.log | sort | uniq -c | sort -nr
