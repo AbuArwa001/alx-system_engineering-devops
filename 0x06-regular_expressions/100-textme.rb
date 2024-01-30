@@ -7,5 +7,5 @@ if match_data
   receiver = match_data[2]
   flags = match_data[3]
 
-  puts "#{sender}, #{receiver}, #{flags}"
+  puts "#{sender},#{receiver},#{flags}"
 end
