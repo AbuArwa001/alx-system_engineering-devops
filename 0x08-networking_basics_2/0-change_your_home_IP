@@ -5,7 +5,9 @@
 # facebook.com resolves to 8.8.8.8.
 
 cp /etc/hosts ~/hosts.new
-sed -i '1i127.0.0.1 localhost' ~/hosts.new
+sed -i '1i\
+127.0.0.1 localhost\
+facebook.com 8.8.8.8' ~/hosts.new
 # echo "127.0.0.1        codespaces-a21a68" >> ~/hosts.new
 sudo cp -f ~/hosts.new /etc/hosts
 rm ~/hosts.new
