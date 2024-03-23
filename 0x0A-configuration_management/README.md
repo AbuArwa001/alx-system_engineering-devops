@@ -26,4 +26,4 @@ Directory Name | Description
 0x0D-configuration_management | directory with all puppet files
 
 ## Author
-Heindrick Cheung
+Khalfan Athman
