@@ -8,4 +8,4 @@ ufw allow 'Nginx HTTP'
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Restart nginx
-ssservice nginx restart
+service nginx restart
