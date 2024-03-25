@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Configure your Nginx server so that /redirect_me is redirecting to another page.
-replacement_str="location /redirect_me {\n        return 301 https://www.example1.com/new_page;\n    }"
+replacement_str="location /redirect_me {\n        return 301 https://jamiamosque.co.ke/itiqaf-form/\n    }"
 apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
