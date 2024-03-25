@@ -5,7 +5,7 @@ apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
 # Configure nginx to listen on port 80 and serve "Hello World!" at the root
-echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Restart nginx
 ssservice nginx restart
