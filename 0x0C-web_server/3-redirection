@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 # Configure your Nginx server so that /redirect_me is redirecting to another page.
-# replacement_str="location /redirect_me {\n        return 301 https://jamiamosque.co.ke/itiqaf-form/\n    }"
 apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
+replacement_str="location /redirect_me {\n        return 301 http://youtube.com/;\n    }"
 # Configure nginx to listen on port 80 and serve "Hello World!" at the root
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
-
-    location /redirect_me {
-        return 301 http://youtube.com/;
-    }
-}" > /etc/nginx/sites-available/default
-# sed -i "/^}/i \\n/$replacement_str" /etc/nginx/sites-available/default
-
+sed -i "/^}/i \\\n$replacement_str" /etc/nginx/sites-available/default
 # Restart nginx
 service nginx restart
