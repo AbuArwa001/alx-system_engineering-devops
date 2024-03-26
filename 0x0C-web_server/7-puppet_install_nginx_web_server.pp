@@ -21,6 +21,23 @@ file { '/var/www/html/index.nginx-debian.html':
   content => 'Hello World!',
 }
 
+# Configure 301 redirect for /redirect_me
+file { '/etc/nginx/sites-available/default':
+  ensure  => 'file',
+  content => "# Redirect /redirect_me to another page
+              server {
+                listen 80;
+                listen [::]:80;
+                server_name _;
+                location /redirect_me {
+                  return 301 https://www.example.com/new_page;
+                }
+                # Include the original configuration
+                include /etc/nginx/sites-available/default;
+              }",
+  require => Package['nginx'],
+  notify  => Service['nginx'],
+}
 # Restart Nginx service
 service { 'nginx':
   ensure  => 'running',
