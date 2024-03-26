@@ -20,7 +20,12 @@ exec { 'allow-nginx':
 file { '/var/www/html/index.nginx-debian.html':
   content => 'Hello World!',
 }
+$replacement_str = "location /redirect_me {\n\treturn 301 https://www.youtube.com/;\n}"
 
+exec { 'redirect_page':
+  command => "sed -i '/^}/i $replacement_str' /etc/nginx/sites-available/default",
+  path    => '/usr/bin',
+}
 # Restart Nginx service
 service { 'nginx':
   ensure  => 'running',
