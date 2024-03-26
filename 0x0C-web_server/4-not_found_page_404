@@ -12,3 +12,4 @@ sudo sed -i 's/try_files $uri $uri\/ =404;/Ceci n'"'"'est pas une page./g' /etc/
 
 # Restart nginx
 service nginx restart
+
