@@ -35,8 +35,6 @@ file { '/etc/nginx/sites-available/default':
                 # Include the original configuration
                 include /etc/nginx/sites-available/default;
               }",
-  require => Package['nginx'],
-  notify  => Service['nginx'],
 }
 # Restart Nginx service
 service { 'nginx':
