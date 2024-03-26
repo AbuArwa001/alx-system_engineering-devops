@@ -24,17 +24,16 @@ file { '/var/www/html/index.nginx-debian.html':
 # Configure 301 redirect for /redirect_me
 file { '/etc/nginx/sites-available/default':
   ensure  => 'file',
-  content => "# Redirect /redirect_me to another page
-              server {
-                listen 80;
-                listen [::]:80;
-                server_name _;
-                location /redirect_me {
-                  return 301 https://www.example.com/new_page;
-                }
-                # Include the original configuration
-                include /etc/nginx/sites-available/default;
-              }",
+  content => "server {
+\tlisten 80;
+\tlisten [::]:80;
+\tserver_name _;
+\tlocation /redirect_me {
+\t\treturn 301 http://www.youtube.com/;
+\t}
+\t# Include the original configuration
+\tinclude /etc/nginx/sites-available/default;
+}",
 }
 # Restart Nginx service
 service { 'nginx':
