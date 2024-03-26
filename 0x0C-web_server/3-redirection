@@ -29,4 +29,3 @@ then
 else
     service nginx restart
 fi;
-
