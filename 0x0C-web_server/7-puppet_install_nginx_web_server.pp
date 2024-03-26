@@ -15,6 +15,12 @@ exec { 'allow-nginx':
   command => 'ufw allow "Nginx HTTP"',
   path    => '/usr/bin',
 }
+
+# Serve "Hello World!" at the root
+file { '/var/www/html/index.nginx-debian.html':
+  content => 'Hello World!',
+}
+
 # Restart Nginx service
 service { 'nginx':
   ensure  => 'running',
