@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# debugging
+apt-get update
+apt-get -y install apache2
+apt-get update
+apt-get -y install apache2-utils
+# rapt install -y tcl
+echo "Hello Holberton" > /usr/local/apache2/htdocs
