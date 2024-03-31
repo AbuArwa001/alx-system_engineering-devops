@@ -40,4 +40,5 @@ done < "$FILE_PATH"
 # Move the temp file to the original file path to overwrite it
 # If you prefer to not overwrite, you can choose a different destination
 mv "$TMP_FILE" "$FILE_PATH"
+service nginx restart
 # echo "Modification complete. The original file was backed up as ${FILE_PATH}.bak"
