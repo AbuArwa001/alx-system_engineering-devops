@@ -1,15 +1,30 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2154
-#configures a new Ubuntu machine nginx
+# configures an Ubuntu machine with nginx
+# FILE="/etc/nginx/sites-available/default"
+# ERRORFILE="/usr/share/nginx/html/404error.html"
+
+# REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
+# ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
+# CUSTOMHEADER='\n\tadd_header X-Served-By $hostname;\n'
+
+# STRING="Hello World!"
+# FOUR="Ceci n'est pas une page"
+
+# apt-get -y update
+# apt-get -y install nginx
+# ufw allow 'Nginx HTTP'
+# echo "$STRING" > /var/www/html/index.nginx-debian.html
+# sed -i "37i\ $REDIRECT" "$FILE"
+
+# echo "$FOUR" > "$ERRORFILE"
+# sed -i "37i\ $ERRORREDIRECT" "$FILE"
+
+# sed -i "37i\ $CUSTOMHEADER" "$FILE"
+# service nginx restart
+
 sudo apt-get update
-sudo apt-get install nginx -y
-sudo ufw allow 'Nginx HTTP'
-echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
-new_string="listen 80 default_server;\\n\\tlocation \/redirect_me {\\n\\t\\treturn 301 https:\/\/www.youtube.com\/;\\n\\t}"
-sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-new_string="listen 80 default_server;\\nerror_page 404 \/404.html;\\n\\tlocation = \/404.html {\\n\\t\\troot \/usr\/share\/nginx\/html;\\n\\t\\tinternal;\\n\\t}"
-sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
-new_string2="http {\\n\\tadd_header X-Served-By \"$HOSTNAME\";"
-sudo sed -i "s/http {/$new_string2/" /etc/nginx/nginx.conf
+sudo apt-get -y install nginx
 sudo service nginx start
+sudo sed -i "/http {/a\         add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+sudo service nginx restart
