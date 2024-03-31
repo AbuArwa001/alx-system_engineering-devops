@@ -27,7 +27,6 @@ while IFS= read -r line; do
     
     # If the flag is set, add the new line before the current line
     if [[ $ADD_NEW_LINE -eq 1 ]]; then
-        echo "PASSED 1"
         echo -e "\t$NEW_LINE" >> "$TMP_FILE"
         # Reset the flag
         ADD_NEW_LINE=0
