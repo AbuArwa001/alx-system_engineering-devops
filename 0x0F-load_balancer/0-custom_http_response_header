@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Path to the default configuration file
+FILE_PATH='/etc/nginx/sites-enabled/default'
+
+# Backup the original file
+cp "$FILE_PATH" "${FILE_PATH}.bak"
+host=$(hostname)
+server=$(echo "$host" | sed -n 's/^.*-\(web-01\|web-02\)$/\1/p')
+# server=$(echo "$host" | grep -oP 'web-0\d+')
+# server=$(echo "$host" | sed 's/^.*-\(web-01\)$/\1/')
+# The line you want to add
+NEW_LINE='add_header X-Served-By "'$server'"'
+
+# Temporary file
+TMP_FILE=$(mktemp)
+
+# Flag to check when to add the new line
+ADD_NEW_LINE=0
+
+# Read the original file line by line
+while IFS= read -r line; do
+    # Check if the line is 'location / {'
+    if [[ "$line" == "        server_name _;" ]]; then
+        # Set the flag to add the new line
+        ADD_NEW_LINE=1
+    fi
+    
+    # If the flag is set, add the new line before the current line
+    if [[ $ADD_NEW_LINE -eq 1 ]]; then
+        echo "PASSED 1"
+        echo -e "\t$NEW_LINE" >> "$TMP_FILE"
+        # Reset the flag
+        ADD_NEW_LINE=0
+    fi
+    
+    # Write the current line to the temp file
+    echo "$line" >> "$TMP_FILE"
+    #((i+=1))
+done < "$FILE_PATH"
+
+# Move the temp file to the original file path to overwrite it
+# If you prefer to not overwrite, you can choose a different destination
+mv "$TMP_FILE" "$FILE_PATH"
+
+# echo "Modification complete. The original file was backed up as ${FILE_PATH}.bak"
