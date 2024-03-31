@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # Path to the default configuration file
+# Install nginx on web-01 server
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+# Configure nginx to listen on port 80 and serve "Hello World!" at the root
+
 FILE_PATH='/etc/nginx/sites-enabled/default'
 
 # Backup the original file
@@ -13,6 +19,7 @@ NEW_LINE='add_header X-Served-By "'$server'"'
 
 # Temporary file
 TMP_FILE=$(mktemp)
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 # Flag to check when to add the new line
 ADD_NEW_LINE=0
