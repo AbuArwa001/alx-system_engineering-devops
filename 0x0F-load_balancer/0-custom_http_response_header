@@ -1,5 +1,5 @@
-# #!/usr/bin/env bash
-# # Path to the default configuration file
+#!/usr/bin/env bash
+# Path to the default configuration file
 # # Install nginx on web-01 server
 # sudo apt-get update
 # sudo apt-get install -y nginx
