@@ -1,72 +1,77 @@
-#!/usr/bin/env bash
-# Path to the default configuration file
-# Install nginx on web-01 server
+# #!/usr/bin/env bash
+# # Path to the default configuration file
+# # Install nginx on web-01 server
+# sudo apt-get update
+# sudo apt-get install -y nginx
+# echo "Hello World!" > index.html
+# sudo mv index.html /var/www/html
+
+# echo "Ceci n'est pas une page" > 404.html
+# sudo mv 404.html /var/www/html
+# echo "server {
+#         listen 80 default_server;
+#         listen [::]:80 default_server;
+#         root /var/www/html;
+#         index index.html;
+#         server_name _;
+#         location /redirect_me {
+#                 rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent
+#                 # return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+#         }
+#         error_page 404 /404.html;
+#         location = /404.html{
+#                 internal;
+#         }
+# }" > default
+# sudo mv -f default /etc/nginx/sites-available/default
+# # Configure nginx to listen on port 80 and serve "Hello World!" at the root
+
+# FILE_PATH='/etc/nginx/sites-enabled/default'
+
+# # Backup the original file
+# cp "$FILE_PATH" "${FILE_PATH}.bak"
+# host=$(hostname)
+# server=$(echo "$host" | sed -n 's/^.*-\(web-01\|web-02\)$/\1/p')
+# # server=$(echo "$host" | grep -oP 'web-0\d+')
+# # server=$(echo "$host" | sed 's/^.*-\(web-01\)$/\1/')
+# # The line you want to add
+# NEW_LINE='add_header X-Served-By "'$server'";'
+
+# # Temporary file
+# TMP_FILE=$(mktemp)
+# echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+# # Flag to check when to add the new line
+# ADD_NEW_LINE=0
+
+# # Read the original file line by line
+# while IFS= read -r line; do
+#     # Check if the line is 'location / {'
+#     if [[ "$line" == "        server_name _;" ]]; then
+#         # Set the flag to add the new line
+#         ADD_NEW_LINE=1
+#     fi
+    
+#     # If the flag is set, add the new line before the current line
+#     if [[ $ADD_NEW_LINE -eq 1 ]]; then
+#         echo -e "\t$NEW_LINE" >> "$TMP_FILE"
+#         # Reset the flag
+#         ADD_NEW_LINE=0
+#     fi
+    
+#     # Write the current line to the temp file
+#     echo "$line" >> "$TMP_FILE"
+#     #((i+=1))
+# done < "$FILE_PATH"
+
+# # Move the temp file to the original file path to overwrite it
+# # If you prefer to not overwrite, you can choose a different destination
+# mv "$TMP_FILE" "$FILE_PATH"
+# service nginx restart
+# # echo "Modification complete. The original file was backed up as ${FILE_PATH}.bak"
 sudo apt-get update
-sudo apt-get install -y nginx
-echo "Hello World!" > index.html
-sudo mv index.html /var/www/html
-
-
-echo "Ceci n'est pas une page" > 404.html
-sudo mv 404.html /var/www/html
-echo "server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /var/www/html;
-        index index.html;
-        server_name _;
-        location /redirect_me {
-                rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent
-                # return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-        error_page 404 /404.html;
-        location = /404.html{
-                internal;
-        }
-}" > default
-sudo mv -f default /etc/nginx/sites-available/default
-# Configure nginx to listen on port 80 and serve "Hello World!" at the root
-
-FILE_PATH='/etc/nginx/sites-enabled/default'
-
-# Backup the original file
-cp "$FILE_PATH" "${FILE_PATH}.bak"
-host=$(hostname)
-server=$(echo "$host" | sed -n 's/^.*-\(web-01\|web-02\)$/\1/p')
-# server=$(echo "$host" | grep -oP 'web-0\d+')
-# server=$(echo "$host" | sed 's/^.*-\(web-01\)$/\1/')
-# The line you want to add
-NEW_LINE='add_header X-Served-By "'$server'";'
-
-# Temporary file
-TMP_FILE=$(mktemp)
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-# Flag to check when to add the new line
-ADD_NEW_LINE=0
-
-# Read the original file line by line
-while IFS= read -r line; do
-    # Check if the line is 'location / {'
-    if [[ "$line" == "        server_name _;" ]]; then
-        # Set the flag to add the new line
-        ADD_NEW_LINE=1
-    fi
-    
-    # If the flag is set, add the new line before the current line
-    if [[ $ADD_NEW_LINE -eq 1 ]]; then
-        echo -e "\t$NEW_LINE" >> "$TMP_FILE"
-        # Reset the flag
-        ADD_NEW_LINE=0
-    fi
-    
-    # Write the current line to the temp file
-    echo "$line" >> "$TMP_FILE"
-    #((i+=1))
-done < "$FILE_PATH"
-
-# Move the temp file to the original file path to overwrite it
-# If you prefer to not overwrite, you can choose a different destination
-mv "$TMP_FILE" "$FILE_PATH"
-service nginx restart
-# echo "Modification complete. The original file was backed up as ${FILE_PATH}.bak"
+sudo apt-get -y install nginx
+sudo service nginx start
+sudo sed -i "/http {/a\         add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+sudo service nginx restart
