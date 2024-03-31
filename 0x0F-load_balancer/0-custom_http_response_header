@@ -36,7 +36,7 @@ server=$(echo "$host" | sed -n 's/^.*-\(web-01\|web-02\)$/\1/p')
 # server=$(echo "$host" | grep -oP 'web-0\d+')
 # server=$(echo "$host" | sed 's/^.*-\(web-01\)$/\1/')
 # The line you want to add
-NEW_LINE='add_header X-Served-By "'$server'"'
+NEW_LINE='add_header X-Served-By "'$server'";'
 
 # Temporary file
 TMP_FILE=$(mktemp)
