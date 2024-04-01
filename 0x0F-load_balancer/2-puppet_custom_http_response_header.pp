@@ -1,56 +1,70 @@
 include stdlib
 
-# Define a class for managing nginx installation and configuration
-class nginx {
-  # UPDATE SYSTEM
-  exec { 'apt-update':
-    command     => '/usr/bin/apt-get update',
-    refreshonly => true,
-  }
+# add stable version of nginx
+exec { 'add nginx stable repo':
+  command => 'sudo add-apt-repository ppa:nginx/stable',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
 
-  # INSTALL nginx
-  package { 'nginx':
-    ensure => installed,
-  }
+# update software packages list
+exec { 'update packages':
+  command => 'apt-get update',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
 
-  # Create index.html file and add content
-  file { '/var/www/html/index.html':
-    ensure  => 'file',
-    content => 'Hello World!',
-    require => Package['nginx'],
-  }
+# install nginx
+package { 'nginx':
+  ensure     => 'installed',
+}
 
-  # Save file_path
-  $file_path = '/etc/nginx/sites-enabled/default'
+# allow HTTP
+exec { 'allow HTTP':
+  command => "ufw allow 'Nginx HTTP'",
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  onlyif  => '! dpkg -l nginx | egrep \'îi.*nginx\' > /dev/null 2>&1',
+}
 
-  # Copy file_path content to backup file
-  exec { 'backup_nginx_default_config':
-    command => "/bin/cp -n ${file_path} ${file_path}.bak",
-    unless  => "/usr/bin/test -f ${file_path}.bak",
-    path    => ['/bin', '/usr/bin'],
-  }
+# change folder rights
+exec { 'chmod www folder':
+  command => 'chmod -R 755 /var/www',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
 
-  # GET SERVER NAME AND SAVE IT TO server VARIABLE
-  exec { 'get_server_name':
-    command     => '/bin/hostname',
-    logoutput   => true,
-    environment => ['server='],
-    provider    => shell,
-    path        => ['/bin', '/usr/bin'],
-    timeout     => 60,
-  }
+# create index file
+file { '/var/www/html/index.html':
+  content => "Hello World!\n",
+}
 
-  # ADD "X-Served-By" HEADER BEFORE SERVER NAME
-  exec { 'insert-header-above-server_name':
-    command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\$server\";' ${file_path}",
-    path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-    onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$server\";' ${file_path}",
-  }
+# Save file_path
+$file_path = '/etc/nginx/sites-enabled/default'
 
-  # RESTART nginx
-  service { 'nginx':
-    ensure  => 'running',
-    enable  => true,
-    require => Package['nginx'],
-  }
+# Copy file_path content to backup file
+exec { 'backup_nginx_default_config':
+  command => "/bin/cp -n ${file_path} ${file_path}.bak",
+  unless  => "/usr/bin/test -f ${file_path}.bak",
+  path    => ['/bin', '/usr/bin'],
+}
+
+# GET SERVER NAME AND SAVE IT TO server VARIABLE
+exec { 'get_server_name':
+  command     => '/bin/hostname',
+  logoutput   => true,
+  environment => ['server='],
+  provider    => shell,
+  path        => ['/bin', '/usr/bin'],
+  timeout     => 60,
+}
+
+# ADD "X-Served-By" HEADER BEFORE SERVER NAME
+exec { 'insert-header-above-server_name':
+  command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\$server\";' ${file_path}",
+  path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+  onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$server\";' ${file_path}",
+}
+
+# RESTART nginx
+service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
+  require => Package['nginx'],
 }
