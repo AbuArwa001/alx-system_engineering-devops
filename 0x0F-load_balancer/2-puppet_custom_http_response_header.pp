@@ -1,3 +1,4 @@
+# configures a brand new Ubuntu machine 
 exec { 'command':
   command  => 'apt-get -y update;
   apt-get -y install nginx;
