@@ -56,7 +56,7 @@ exec { 'get_server_name':
 $server = file('/tmp/server_name.txt')
 
 exec { 'get_web-server_name':
-  command   => "/bin/echo ${server} | /bin/sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p' > /tmp/web_server.txt",
+  command   => "/bin/echo ${server} ' > /tmp/web_server.txt",
   logoutput => true,
   provider  => shell,
   path      => ['/bin', '/usr/bin'],
