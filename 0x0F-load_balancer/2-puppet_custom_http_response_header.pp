@@ -1,5 +1,5 @@
+# configures a brand new Ubuntu machine 
 include stdlib
-
 # add stable version of nginx
 exec { 'add nginx stable repo':
   command => 'sudo add-apt-repository ppa:nginx/stable',
