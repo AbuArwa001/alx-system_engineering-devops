@@ -67,22 +67,19 @@ file { '/tmp/server_name.txt':
   content => $server,
   notify  => Exec['insert-header-above-server_name'],
 }
-exec { 'get_server_name':
-  command   => '/bin/hostname',
+exec { 'get_web-server_name':
+  command   => "web_server=\$(echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p')",
   logoutput => true,
   provider  => shell,
   path      => ['/bin', '/usr/bin'],
   timeout   => 60,
-  unless    => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
 }
-
-
 
 # ADD "X-Served-By" HEADER BEFORE SERVER NAME
 exec { 'insert-header-above-server_name':
   command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\$server\";' ${file_path}",
   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-  onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$server\";' ${file_path}",
+  onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$web_server\";' ${file_path}",
 }
 
 # RESTART nginx
