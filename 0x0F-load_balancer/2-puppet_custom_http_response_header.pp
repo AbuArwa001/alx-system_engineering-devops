@@ -47,13 +47,16 @@ exec { 'backup_nginx_default_config':
 
 # GET SERVER NAME AND SAVE IT TO server VARIABLE
 exec { 'get_server_name':
-  command     => '/bin/hostname',
-  logoutput   => true,
-  environment => ['server='],
-  provider    => shell,
-  path        => ['/bin', '/usr/bin'],
-  timeout     => 60,
+  command   => '/bin/hostname',
+  logoutput => true,
+  unless    => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
+  provider  => shell,
+  path      => ['/bin', '/usr/bin'],
+  timeout   => 60,
+  environment => [],
+  unless  => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
 }
+
 
 # ADD "X-Served-By" HEADER BEFORE SERVER NAME
 exec { 'insert-header-above-server_name':
