@@ -54,27 +54,26 @@ exec { 'backup_nginx_default_config':
 }
 # GET SERVER NAME AND SAVE IT TO  FILE
 exec { 'get_server_name':
-  command     => '/bin/hostname',
-  logoutput   => true,
-  creates     => '/tmp/server_name.txt',
-  provider    => shell,
-  path        => ['/bin', '/usr/bin'],
-  timeout     => 60,
+  command   => '/bin/hostname',
+  logoutput => true,
+  creates   => '/tmp/server_name.txt',
+  provider  => shell,
+  path      => ['/bin', '/usr/bin'],
+  timeout   => 60,
 }
 #READ THE FILE AND SAVE IT TO A server VARIABLE
 file { '/tmp/server_name.txt':
-  ensure => file,
+  ensure  => file,
   content => $server,
-  notify => Exec['insert-header-above-server_name'],
+  notify  => Exec['insert-header-above-server_name'],
 }
-
 exec { 'get_server_name':
-  command     => '/bin/hostname',
-  logoutput   => true,
-  provider    => shell,
-  path        => ['/bin', '/usr/bin'],
-  timeout     => 60,
-  unless      => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
+  command   => '/bin/hostname',
+  logoutput => true,
+  provider  => shell,
+  path      => ['/bin', '/usr/bin'],
+  timeout   => 60,
+  unless    => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
 }
 
 
