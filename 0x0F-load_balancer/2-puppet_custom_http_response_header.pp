@@ -77,7 +77,7 @@ exec { 'get_web-server_name':
 }
 
 exec { 'insert-header-above-server_name':
-  command => "sed -i '/^\s*server_name _;/i\tadd_header X-Served-By ${web_server1};' ${file_path}",
+  command => "sed -i '/^\s*server_name _;/i\tadd_header X-Served-By ${web_server};' ${file_path}",
   path    => ['/usr/bin', '/sbin', '/usr/sbin'],
 }
 
