@@ -80,7 +80,7 @@ exec { 'get_web-server_name':
 
 # ADD "X-Served-By" HEADER BEFORE SERVER NAME
 exec { 'insert-header-above-server_name':
-  command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\$server\";' ${file_path}",
+  command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\web_server\";' ${file_path}",
   path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
   onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$web_server\";' ${file_path}",
 }
