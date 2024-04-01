@@ -1,9 +1,16 @@
 # configures a brand new Ubuntu machine 
-include stdlib
-# add stable version of nginx
+# Install software-properties-common
+package { 'software-properties-common':
+  ensure => installed,
+}
+
+# Add NGINX stable repository
 exec { 'add nginx stable repo':
-  command => 'sudo add-apt-repository ppa:nginx/stable',
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  command     => 'add-apt-repository -y ppa:nginx/stable',
+  path        => ['/usr/bin', '/bin'],
+  environment => 'DEBIAN_FRONTEND=noninteractive',
+  unless      => 'grep -q "^deb .*/nginx/stable" /etc/apt/sources.list /etc/apt/sources.list.d/*',
+  require     => Package['software-properties-common'],
 }
 
 # update software packages list
@@ -21,8 +28,9 @@ package { 'nginx':
 exec { 'allow HTTP':
   command => "ufw allow 'Nginx HTTP'",
   path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  onlyif  => '! dpkg -l nginx | egrep \'îi.*nginx\' > /dev/null 2>&1',
+  unless  => "dpkg -l nginx | grep 'îi.*nginx' > /dev/null 2>&1",
 }
+
 
 # change folder rights
 exec { 'chmod www folder':
