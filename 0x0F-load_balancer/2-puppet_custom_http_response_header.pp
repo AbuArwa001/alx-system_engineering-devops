@@ -63,7 +63,7 @@ exec { 'get_web-server_name':
   creates   => '/tmp/web_server.txt',
   timeout   => 60,
 }
-
+$web_server = file('/tmp/web_server.txt')
 exec { 'insert-header-above-server_name':
   command => "sed -i '/^\s*server_name _;/i\tadd_header X-Served-By \"${web_server}\";' ${file_path}",
   path    => ['/bin','/usr/bin', '/sbin', '/usr/sbin'],
@@ -76,3 +76,4 @@ service { 'nginx':
   enable  => true,
   require => Package['nginx'],
 }
+#312646-web-01
