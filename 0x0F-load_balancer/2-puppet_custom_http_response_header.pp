@@ -52,12 +52,25 @@ exec { 'backup_nginx_default_config':
   unless  => "/usr/bin/test -f ${file_path}.bak",
   path    => ['/bin', '/usr/bin'],
 }
-
-# GET SERVER NAME AND SAVE IT TO server VARIABLE
+# GET SERVER NAME AND SAVE IT TO  FILE
 exec { 'get_server_name':
   command     => '/bin/hostname',
   logoutput   => true,
-  environment => ['server='],
+  creates     => '/tmp/server_name.txt',
+  provider    => shell,
+  path        => ['/bin', '/usr/bin'],
+  timeout     => 60,
+}
+#READ THE FILE AND SAVE IT TO A server VARIABLE
+file { '/tmp/server_name.txt':
+  ensure => file,
+  content => $server,
+  notify => Exec['insert-header-above-server_name'],
+}
+
+exec { 'get_server_name':
+  command     => '/bin/hostname',
+  logoutput   => true,
   provider    => shell,
   path        => ['/bin', '/usr/bin'],
   timeout     => 60,
