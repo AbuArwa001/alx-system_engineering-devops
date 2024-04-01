@@ -7,8 +7,8 @@
 # fi
 
 sudo apt-get install -y --no-install-recommends software-properties-common
-echo | add-apt-repository -y ppa:vbernat/haproxy-2.8
-sudo apt-get install -y haproxy=2.8.\* 
+echo | add-apt-repository -y ppa:vbernat/haproxy-2.0
+sudo apt-get install -y haproxy=2.0.\* 
 # sudo chown  $USER:$USER /etc/haproxy/haproxy.cfg
 sudo service enable haproxy
 FILE_PATH='/etc/haproxy/haproxy.cfg'
