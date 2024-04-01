@@ -29,7 +29,7 @@ package { 'ufw':
 
 # allow HTTP
 exec { 'allow HTTP':
-  command => "ufw allow 'Nginx HTTP'",
+  command => "sudo ufw allow 'Nginx HTTP'",
   path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
   unless  => "dpkg -l nginx | grep 'îi.*nginx' > /dev/null 2>&1",
   require => Package['ufw'],
