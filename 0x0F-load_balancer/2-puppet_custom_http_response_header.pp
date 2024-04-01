@@ -55,35 +55,32 @@ exec { 'backup_nginx_default_config':
   unless  => "/usr/bin/test -f ${file_path}.bak",
   path    => ['/bin', '/usr/bin'],
 }
-# GET SERVER NAME AND SAVE IT TO  FILE
+# GET SERVER NAME AND SAVE IT TO A FILE
 exec { 'get_server_name':
-  command   => '/bin/hostname',
-  logoutput => true,
-  creates   => '/tmp/server_name.txt',
-  provider  => shell,
-  path      => ['/bin', '/usr/bin'],
-  timeout   => 60,
-}
-#READ THE FILE AND SAVE IT TO A server VARIABLE
-file { '/tmp/server_name.txt':
-  ensure  => file,
-  content => $server,
-  notify  => Exec['insert-header-above-server_name'],
-}
-exec { 'get_web-server_name':
-  command   => "web_server=\$(echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p')",
+  command   => '/bin/hostname > /tmp/server_name.txt',
   logoutput => true,
   provider  => shell,
   path      => ['/bin', '/usr/bin'],
   timeout   => 60,
 }
 
-# ADD "X-Served-By" HEADER BEFORE SERVER NAME
-exec { 'insert-header-above-server_name':
-  command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"${web_server}";' ${file_path}",
-  path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
-  onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$web_server\";' ${file_path}",
+# READ THE FILE AND SAVE IT TO A VARIABLE
+$server = file('/tmp/server_name.txt')
+
+exec { 'get_web-server_name':
+  command   => "/bin/echo ${server} | /bin/sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p' > /tmp/web_server.txt",
+  logoutput => true,
+  provider  => shell,
+  path      => ['/bin', '/usr/bin'],
+  creates   => '/tmp/web_server.txt',
+  timeout   => 60,
 }
+
+exec { 'insert-header-above-server_name':
+  command => "sed -i '/^\s*server_name _;/i\tadd_header X-Served-By ${web_server1};' ${file_path}",
+  path    => ['/usr/bin', '/sbin', '/usr/sbin'],
+}
+
 
 # RESTART nginx
 service { 'nginx':
