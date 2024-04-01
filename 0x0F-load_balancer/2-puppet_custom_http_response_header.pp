@@ -56,7 +56,7 @@ exec { 'get_server_name':
 $server = file('/tmp/server_name.txt')
 
 exec { 'insert-header-above-server_name':
-  command => "sudo sed -i "/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default;",
+  command => "sudo sed -i '/listen 80 default_server;/a add_header X-Served-By ${server};' /etc/nginx/sites-available/default;",
   path    => ['/bin','/usr/bin', '/sbin', '/usr/sbin'],
 }
 
