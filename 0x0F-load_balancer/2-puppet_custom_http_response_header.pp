@@ -23,18 +23,6 @@ exec { 'update packages':
 package { 'nginx':
   ensure     => 'installed',
 }
-package { 'ufw':
-  ensure => installed,
-}
-
-# allow HTTP
-exec { 'allow HTTP':
-  command => "sudo ufw allow 'Nginx HTTP'",
-  path    => ['/bin','/usr/bin', '/sbin', '/usr/sbin'],
-  unless  => "dpkg -l nginx | grep 'îi.*nginx' > /dev/null 2>&1",
-  require => Package['ufw'],
-}
-
 # change folder rights
 exec { 'chmod www folder':
   command => 'chmod -R 755 /var/www',
