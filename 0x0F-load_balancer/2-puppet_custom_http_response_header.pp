@@ -1,32 +1,56 @@
+include stdlib
+
 # Define a class for managing nginx installation and configuration
-class nginx_setup {
-    package { 'nginx':
-        ensure  => 'installed',
-        require => Package['nginx'],
-    }
+class nginx {
+  # UPDATE SYSTEM
+  exec { 'apt-update':
+    command     => '/usr/bin/apt-get update',
+    refreshonly => true,
+  }
 
-    file { '/var/www/html/index.html':
-        ensure  => 'file',
-        content => 'Hello World!',
-        require => Package['nginx'],
-    }
+  # INSTALL nginx
+  package { 'nginx':
+    ensure => installed,
+  }
 
-    file { '/etc/nginx/sites-enabled/default':
-        ensure  => 'file',
-        content => template('nginx/default.erb'),
-        require => Package['nginx'],
-        notify  => Service['nginx'],
-    }
+  # Create index.html file and add content
+  file { '/var/www/html/index.html':
+    ensure  => 'file',
+    content => 'Hello World!',
+    require => Package['nginx'],
+  }
 
-    service { 'nginx':
-        ensure    => 'running',
-        enable    => true,
-        hasstatus => true,
-        hasrestart => true,
-    }
-}
+  # Save file_path
+  $file_path = '/etc/nginx/sites-enabled/default'
 
-# Apply the nginx_setup class to the node
-node 'web-01' {
-    include nginx_setup
+  # Copy file_path content to backup file
+  exec { 'backup_nginx_default_config':
+    command => "/bin/cp -n ${file_path} ${file_path}.bak",
+    unless  => "/usr/bin/test -f ${file_path}.bak",
+    path    => ['/bin', '/usr/bin'],
+  }
+
+  # GET SERVER NAME AND SAVE IT TO server VARIABLE
+  exec { 'get_server_name':
+    command     => '/bin/hostname',
+    logoutput   => true,
+    environment => ['server='],
+    provider    => shell,
+    path        => ['/bin', '/usr/bin'],
+    timeout     => 60,
+  }
+
+  # ADD "X-Served-By" HEADER BEFORE SERVER NAME
+  exec { 'insert-header-above-server_name':
+    command => "sed -i '/^\\s*server_name _;/i\\        add_header X-Served-By \"\$server\";' ${file_path}",
+    path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+    onlyif  => "grep -q -P '^\\s*server_name _;' ${file_path} && ! grep -q -P '^\\s*add_header X-Served-By \"\\\$server\";' ${file_path}",
+  }
+
+  # RESTART nginx
+  service { 'nginx':
+    ensure  => 'running',
+    enable  => true,
+    require => Package['nginx'],
+  }
 }
