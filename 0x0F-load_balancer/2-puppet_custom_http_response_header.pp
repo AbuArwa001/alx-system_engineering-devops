@@ -61,7 +61,7 @@ exec { 'get_server_name':
   provider    => shell,
   path        => ['/bin', '/usr/bin'],
   timeout     => 60,
-  unless      => "echo \$server | sed -n 's/^.*-\(web-01\|web-02\)$/\1/p'",
+  unless      => "echo \$server | sed -n 's/^.*-\\(web-01\\|web-02\\)$/\\1/p'",
 }
 
 
