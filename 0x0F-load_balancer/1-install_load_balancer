@@ -7,8 +7,8 @@
 # fi
 
 sudo apt-get install -y --no-install-recommends software-properties-common
-echo | add-apt-repository -y ppa:vbernat/haproxy-2.0
-sudo apt-get install -y haproxy=2.0.\* 
+echo | add-apt-repository -y ppa:vbernat/haproxy-2.8
+sudo apt-get install -y haproxy=2.8.\* 
 # sudo chown  $USER:$USER /etc/haproxy/haproxy.cfg
 sudo service enable haproxy
 FILE_PATH='/etc/haproxy/haproxy.cfg'
@@ -22,8 +22,8 @@ backend="backend SERVERS
 \tbalance roundrobin
 \toption forwardfor
 \thttp-request set-header X-Forwarded-Port %[dst_port]
-\tserver 312646-web-01 34.204.81.253:80 check
-\tserver 312646-web-02 52.87.154.218:80 check
+\tserver web-01 34.204.81.253:80 check
+\tserver web-02 52.87.154.218:80 check
 "
 echo -e "$frontend" >> "$FILE_PATH"
 echo -e "$backend" >> "$FILE_PATH"
