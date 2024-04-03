@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 # This script checks and fixes Nginx installation on Ubuntu to ensure it listens on port 80
 
-# Update package lists quietly
-sudo apt-get update -qq
+# Update package lists quietly and suppress output
+sudo apt-get update -qq > /dev/null 2>&1
 
 # Check if nginx is installed, remove it if present, and always install
 if dpkg -l | grep -qw nginx; then
     echo "Nginx is installed, removing and reinstalling..."
-    sudo apt-get remove --purge -y nginx nginx-common -qq
-    sudo apt-get autoremove -y -qq
-    sudo apt-get install -y nginx -qq
+    sudo apt-get remove --purge -y nginx nginx-common -qq > /dev/null 2>&1
+    sudo apt-get autoremove -y -qq > /dev/null 2>&1
+    sudo apt-get install -y nginx -qq > /dev/null 2>&1
 else
     echo "Nginx is not installed, installing..."
-    sudo apt-get install -y nginx -qq
+    sudo apt-get install -y nginx -qq > /dev/null 2>&1
 fi
 
-# Restart nginx to apply changes and enable it on boot
-sudo service nginx restart
-sudo systemctl enable nginx
+# Restart nginx to apply changes and suppress output
+sudo service nginx restart > /dev/null 2>&1
+
+# Enable nginx to start on boot using the update-rc.d command and suppress output
+sudo update-rc.d nginx defaults > /dev/null 2>&1
 
 echo "Nginx installation and setup complete."
