@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# what’s keeping Ubuntu container’s Nginx installation from listening on port 80.
+# Update package lists
+sudo apt-get update
+
+# Check if nginx is installed, remove it if present, and always install
+if dpkg -l | grep -qw nginx; then
+    echo "Nginx is installed, removing and reinstalling..."
+    sudo apt-get remove --purge -y nginx nginx-common
+    sudo apt-get autoremove -y
+    sudo apt-get install -y nginx
+else
+    echo "Nginx is not installed, installing..."
+    sudo apt-get install -y nginx
+fi
+
+# Restart nginx to apply changes and enable it on boot
+sudo service nginx restart
+sudo service nginx  enable
+
+echo "Nginx installation and setup complete."
