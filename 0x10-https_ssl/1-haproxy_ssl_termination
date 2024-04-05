@@ -1,51 +1,4 @@
-#!/usr/bin/env bash
-# Installing CertBot
-# 1. remove os dependent certbot
-sudo apt-get remove certbot
-
-# 2. INSTALL SNAP
-sudo snap install --classic certbot
-
-# 3. PREPARE CERTBOT
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-
-# 4. STOP THE WEB SERVER TO RUN A CERT
-service haproxy stop
-
-# 5. RUN A CERT
-sudo certbot certonly --standalone
-
-# CHECK IF GIT IS INSTALLED
-check=$(dpkg -l git >/dev/null 2>&1)
-if [ "$?" -ne 0 ]; then
-    sudo apt install git
-fi
-
-# DOWNLOAD CERTBOT
-git clone https://github.com/certbot/certbot /opt/letsencrypt
-
-# Generating the certificate
-netstat -nlt | grep ':80\s'
-netstat -nlt | grep ':443\s'
-
-cd /opt/letsencrypt
-./certbot-auto certonly --standalone -d athcongroup.tech -d www.athcongroup.tech
-./certbot-auto renew --pre-hook "service haproxy stop" --post-hook "service haproxy start"
-
-# Concatenating the certificate and private key for HAProxy
-DOMAIN='athcongroup.tech'
-sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
-
-# Setting up a cron job for auto-renewal (this should be done within the crontab editor)
-# crontab -e
-
-# Backup the current HAProxy configuration
-service haproxy stop
-# Backup the current HAProxy configuration
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.old
-
-# Define the new HAProxy configuration
-config="global
+global
     daemon
     maxconn 2048
     tune.ssl.default-dh-param 2048
@@ -89,10 +42,3 @@ backend www-backend
 
 backend letsencrypt-backend
     server letsencrypt 127.0.0.1:54321
-"
-
-# Write the new configuration to the HAProxy configuration file
-echo "$config" > /etc/haproxy/haproxy.cfg
-
-# Start the HAProxy service
-service haproxy start
