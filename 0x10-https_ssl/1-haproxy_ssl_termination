@@ -1,5 +1,6 @@
 global
     daemon
+    chroot /var/lib/haproxy
     maxconn 2048
     tune.ssl.default-dh-param 2048
 
@@ -23,12 +24,11 @@ defaults
 
 frontend www-http
     bind *:80
-    reqadd X-Forwarded-Proto:\ http
+    http-request add-header X-Forwarded-Proto http
     redirect scheme https code 301 if !{ ssl_fc }
-
 frontend www-https
-    bind *:443 ssl crt /etc/haproxy/certs/www.example.com.pem
-    reqadd X-Forwarded-Proto:\ https
+    bind *:443 ssl crt /etc/haproxy/certs/www.athcongroup.tech.pem
+    http-request add-header X-Forwarded-Proto https  # Use this line instead
     acl letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
     default_backend www-backend
