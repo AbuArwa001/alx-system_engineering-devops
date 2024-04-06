@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script checks and fixes Nginx installation on Ubuntu to ensure it listens on port 80
+sudo apt-get update -qq > /dev/null
+sudo service nginx stop > /dev/null
+sudo apt-get install -y nginx -qq > /dev/null
