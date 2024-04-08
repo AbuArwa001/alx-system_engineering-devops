@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # This script checks and fixes Nginx installaon Ubuntu to ensure it listens on port 80
-./0-nginx_likes_port_80
-echo "hi" > /var/run/nginx.pid
-echo "hi" > /run/nginx.pid
+sudo apt-get install -y nginx -qq > /dev/null
+echo "" | sudo tee /var/run/nginx.pid > /run/nginx.pid
+
