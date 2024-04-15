@@ -24,8 +24,6 @@ Congratulations on completing the quiz!
 
 ## Tasks
 ### 0. Block all incoming traffic but
-**Mandatory**
-
 Install and configure UFW on web-01 to block all incoming traffic except for TCP ports 22 (SSH), 443 (HTTPS SSL), and 80 (HTTP).
 
 **Commands Used:**
