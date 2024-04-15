@@ -6,3 +6,5 @@ sudo ufw allow outgoing
 sudo ufw allow ssh
 sudo ufw allow 80
 sudo ssh allow 443
+sudo ufw disable
+sudo ufw enable
