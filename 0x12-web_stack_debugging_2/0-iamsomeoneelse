@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#command to show/display user
+if [ $# -eq 0 ]
+then
+    echo "No arguments supplied"
+else
+    sudo -H -u "$1" whoami
+fi
