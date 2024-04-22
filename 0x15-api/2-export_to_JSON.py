@@ -28,11 +28,12 @@ def run():
     list_user_tasks = []
     for task in loded:
         if task['userId'] == int(sys.argv[1]):
-            otut ={"task": f"{task['title']}", "completed":f"{task['completed']}", "username":f"{umn}"}
-            list_user_tasks.append(otut)        
+            otut = {"task": f"{task['title']}",
+                    "completed": f"{task['completed']}", "username": f"{umn}"}
+            list_user_tasks.append(otut)
     user_tasks = {sys.argv[1]: list_user_tasks}
     json_object = json.dumps(user_tasks)
-    with open(f"{sys.argv[1]}.json","w") as out:
+    with open(f"{sys.argv[1]}.json", "w") as out:
         out.write(json_object)
 
 
