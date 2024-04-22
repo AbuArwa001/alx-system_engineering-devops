@@ -20,16 +20,16 @@ def run():
 
     loded = json.loads(todos)
     EMPLOYEE = json.loads(user)
-    NUMBER_OF_DONE_TASKS = sum(1 for i in loded if i['completed']
+    no_d_tsks = sum(1 for i in loded if i['completed']
                                and i['userId'] == int(sys.argv[1]))
-    TOTAL_NUMBER_OF_TASK = sum(1 for i in loded
+    ttl_tsk = sum(1 for i in loded
                                if i['userId'] == int(sys.argv[1]))
     for key, val in EMPLOYEE.items():
         if key == 'name':
-            EMPLOYEE_NAME = val
+            emn = val
             break
-    print(f'Employee {EMPLOYEE_NAME} is done with\
-tasks({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASK}):')
+    output = "Employee {} is done with tasks({}/{}):".format(emn, no_d_tsks, ttl_tsk)
+    print(output)
     for i in loded:
         if i['completed'] and i['userId'] == int(sys.argv[1]):
             print(f"\t {i['title']}")
