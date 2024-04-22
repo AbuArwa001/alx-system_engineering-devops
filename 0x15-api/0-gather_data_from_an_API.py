@@ -27,6 +27,7 @@ def run():
     for key, val in EMPLOYEE.items():
         if key == 'name':
             EMPLOYEE_NAME = val
+            break
     print(f'Employee {EMPLOYEE_NAME} is done with\
 tasks({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASK}):')
     for i in loded:
