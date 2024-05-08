@@ -12,7 +12,7 @@ def top_ten(subreddit):
         headers={"User-Agent": "Custom"},
         params={"limit": 10},
     )
-
+    print(req.status_code)
     if req.status_code == 200:
         for get_data in req.json().get("data").get("children"):
             dat = get_data.get("data")
