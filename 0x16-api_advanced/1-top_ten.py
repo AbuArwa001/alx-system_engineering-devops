@@ -7,19 +7,16 @@ import requests
 
 def top_ten(subreddit):
     """Gets the total subscribers for a given subreddit"""
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {"User-Agent": "Subs/0.1"}
-    response = requests.get(url, headers=headers)
+    req = requests.get(
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+        params={"limit": 10},
+    )
 
-    if response.status_code == 200:
-        data = response.json()
-        titles = data["data"]["children"]
-        i = 0
-        for title in titles:
-            if "title" in title["data"]:
-                print(title["data"]["title"])
-                i = i + 1
-            if i == 10:
-                break
+    if req.status_code == 200:
+        for get_data in req.json().get("data").get("children"):
+            dat = get_data.get("data")
+            title = dat.get("title")
+            print(title)
     else:
         print(None)
