@@ -9,7 +9,7 @@ def top_ten(subreddit):
     """Gets the total subscribers for a given subreddit"""
     req = requests.get(
         "https://www.reddit.com/r/{}/hot.json".format(subreddit),
-        headers={"User-Agent": "Custom"},
+        headers = {'User-Agent': 'script:scr ipt:v1.0 (by /u/yourusername)'},
         params={"limit": 10},
     )
     print(req.status_code)
