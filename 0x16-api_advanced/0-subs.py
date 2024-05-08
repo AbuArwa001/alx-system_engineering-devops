@@ -6,17 +6,15 @@ import requests
 
 
 def number_of_subscribers(subreddit):
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {"User-Agent": "Script/0.0.1"}
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
-        data = response.json()
-        return data["data"]["subscribers"]
+    username = 'Educational-Gear-868'
+    password = 'Educational-1001'
+    user_pass_dict = {'user': username, 'passwd': password, 'api_type': 'json'}
+    headers = {'user-agent': '/u/Educational-Gear-868'}
+    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    client = requests.session()
+    client.headers = headers
+    r = client.get(url, allow_redirects=False)
+    if r.status_code == 200:
+        return (r.json()["data"]["subscribers"])
     else:
-        return 0
-
-# Example usage
-if __name__ == '__main__':
-    subreddit = "programming"
-    print(number_of_subscribers(subreddit))
+        return (0)
