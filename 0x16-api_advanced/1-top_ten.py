@@ -7,7 +7,7 @@ import requests
 
 def top_ten(subreddit):
     """Gets the total subscribers for a given subreddit"""
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"User-Agent": "Subs/0.1"}
     response = requests.get(url, headers=headers)
 
