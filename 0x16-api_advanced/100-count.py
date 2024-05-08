@@ -1,5 +1,10 @@
-import requests
+#!/usr/bin/python3
+"""
+    Recursively fetches titles of hot articles from a
+    subreddit and counts occurrences of specified keywords.
+"""
 import re
+import requests
 
 
 def count_words(subreddit, word_list, counts={}, after=""):
