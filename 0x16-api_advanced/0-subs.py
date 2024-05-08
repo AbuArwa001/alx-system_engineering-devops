@@ -6,16 +6,17 @@ import requests
 
 
 def number_of_subscribers(subreddit):
-    """Gets the total subscribers for a given subreddit"""
-    if subreddit is None:
-        return 0
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    headers = {"User-Agent": "Subs/0.1"}
+    headers = {"User-Agent": "Script/0.0.1"}
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
         data = response.json()
-        subscribers = data["data"]["subscribers"]
-        return subscribers
+        return data["data"]["subscribers"]
     else:
         return 0
+
+# Example usage
+if __name__ == '__main__':
+    subreddit = "programming"
+    print(number_of_subscribers(subreddit))
