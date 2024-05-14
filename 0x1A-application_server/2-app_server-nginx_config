@@ -1,7 +1,7 @@
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    #server_name localhost 34.204.81.253;
+    server_name localhost 34.204.81.253;
     add_header X-Served-By $hostname;
     root   /var/www/html;
     index  index.html index.htm;
