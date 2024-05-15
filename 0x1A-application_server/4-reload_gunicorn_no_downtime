@@ -1,12 +1,7 @@
-#!/usr/bin/env bash
-# Script to reload Gunicorn in a graceful way
-
+#!/bin/bash
 # Define the path to the Gunicorn PID file
-GUNICORN_PID_FILE="/var/run/gunicorn.pid"
 
-# Find the master process PID and write it to the PID file
-# Ensure you have the necessary permissions to write to the PID file
-pgrep -f 'gunicorn' | sort -n | head -n 1 | sudo tee $GUNICORN_PID_FILE
+GUNICORN_PID_FILE="/var/run/gunicorn.pid"
 
 # Check if the Gunicorn PID file exists
 if [ -f "$GUNICORN_PID_FILE" ]; then
@@ -15,7 +10,7 @@ if [ -f "$GUNICORN_PID_FILE" ]; then
 
     # Send the HUP signal to gracefully reload Gunicorn
     echo "Reloading Gunicorn (PID: $MASTER_PID)..."
-    sudo kill -HUP "$MASTER_PID"
+    kill -HUP "$MASTER_PID"
 
     echo "Gunicorn has been reloaded gracefully."
 else
