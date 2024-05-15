@@ -16,3 +16,4 @@ if [ -f "$GUNICORN_PID_FILE" ]; then
     # Send the HUP signal to gracefully reload Gunicorn
     echo "Reloading Gunicorn (PID: $MASTER_PID)..."
     sudo kill -HUP "$MASTER_PID"
+fi
