@@ -1,0 +1,66 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name 127.0.0.1 34.204.81.253;
+    add_header X-Served-By $hostname;
+    root   /var/www/html;
+    index  index.html index.htm;
+
+    location / {
+        proxy_pass http://127.0.0.1:5003/2-hbnb/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+   }
+    location /static/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static;
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+    location /static/styles/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/styles/;
+    }
+
+    location /static/scripts/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/scripts/;
+    }
+
+    location /static/images/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/images/;
+    }
+    location /api/ {
+        proxy_pass http://127.0.0.1:5002;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /airbnb-onepage/ {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+   }
+    location /airbnb-dynamic/number_odd_or_even/ {
+        rewrite /airbnb-dynamic/(.*) $1 break;
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even;
+    }
+    location /hbnb_static {
+        alias /data/web_static/current;
+        index index.html index.htm;
+    }
+
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}
